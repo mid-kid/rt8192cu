@@ -583,11 +583,11 @@ $(MODULE_NAME)-y += $(_OS_INTFS_FILES)
 $(MODULE_NAME)-$(CONFIG_MP_INCLUDED) += core/rtw_mp.o \
 					core/rtw_mp_ioctl.o
 
-obj-$(CONFIG_RTL8192CU) := $(MODULE_NAME).o
+obj-$(CONFIG_8192CU) := $(MODULE_NAME).o
 
 else
 
-export CONFIG_RTL8192CU = m
+export CONFIG_8192CU = m
 
 all: modules
 
@@ -598,9 +598,8 @@ strip:
 	$(CROSS_COMPILE)strip $(MODULE_NAME).ko --strip-unneeded
 
 install:
-	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
+	install -p -m 644 $(MODULE_NAME).ko -D -t $(MODDESTDIR)
 	/sbin/depmod -a ${KVER}
-	echo "blacklist rtl8192cu" >> /etc/modprobe.d/blacklist.conf
 
 dkms:	clean
 	rm -rf /usr/src/$(MODULE_NAME)-4.0.29
@@ -610,7 +609,6 @@ dkms:	clean
 	dkms add -m $(MODULE_NAME) -v 4.0.29
 	dkms build -m $(MODULE_NAME) -v 4.0.29
 	dkms install -m $(MODULE_NAME) -v 4.0.29 --force
-	echo "blacklist rtl8192cu" >> /etc/modprobe.d/blacklist.conf
 
 uninstall:
 	rm -f $(MODDESTDIR)/$(MODULE_NAME).ko
