@@ -1,0 +1,1 @@
+As of kernel 4.12, this driver doesn't work. However, the in-tree rtl8192cu driver has started working properly for my USB dongle, and even supports AP mode. I recommend trying that before possibly checking out the master branch with an older kernel. Whether you'd still need the [hostapd-rtl871xdrv](https://github.com/pritambaral/hostapd-rtl871xdrv) patches, I'm not sure.
